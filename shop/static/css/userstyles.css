@@ -1,0 +1,76 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: #333;
+  font-size: 2.5em;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 50%;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 1em;
+}
+body > div > div > input.order-search{
+  width: 96px;
+  cursor: pointer;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+th,
+td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #007bff;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 1em;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+
+  .search-bar input {
+    width: 80%;
+  }
+}

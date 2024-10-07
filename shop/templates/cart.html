@@ -1,0 +1,260 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon -->
+    <link
+      rel="shortcut icon"
+      href="{% static 'images/favicon.ico' %}"
+      type="image/x-icon"
+    />
+    <!-- Box icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+    <!-- Custom StyleSheet -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <title>Your Cart</title>
+  </head>
+  <body onload="loadCart()">
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="navigation container">
+        <div class="logo">
+          <h1>Codevo</h1>
+        </div>
+        <div class="menu">
+          <div class="top-nav">
+            <div class="logo">
+              <h1>Codevo</h1>
+            </div>
+            <div class="close">
+              <i class="bx bx-x"></i>
+            </div>
+          </div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="{% url 'home' %}" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'product' %}" class="nav-link">Products</a>
+            </li>
+            <li class="nav-item">
+              <a href="#about" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'account' %}" class="nav-link">Account</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <form
+                id="logout-form"
+                action="{% url 'logout' %}"
+                method="post"
+                style="display: none"
+              >
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+              </form>
+              <a
+                href="#"
+                class="nav-link"
+                onclick="document.getElementById('logout-form').submit();"
+                >Logout</a
+              >
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a href="{% url 'login' %}" class="nav-link">Login</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <a href="{% url 'cart' %}" class="nav-link icon"
+                ><i class="bx bx-shopping-bag"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="hamburger">
+          <i class="bx bx-menu"></i>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Cart Items -->
+    <div class="container-md cart" id="cart-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="cart-items">
+          <!-- Cart items will be loaded here by the loadCart function -->
+        </tbody>
+      </table>
+      <div class="total-price">
+        <table>
+          <tr>
+            <td>Subtotal</td>
+            <td id="subtotal">&#8377 ;0.00</td>
+          </tr>
+          <tr>
+            <td>Tax</td>
+            <td id="tax">&#8377 ;0.00</td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td id="total">&#8377 ;0.00</td>
+          </tr>
+        </table>
+        <a href="{% url 'checkout' %}" class="checkout btn">Proceed To Checkout</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="section footer">
+      <div class="container">
+        <div class="footer-container">
+          <div class="footer-center">
+            <h3>EXTRAS</h3>
+            <a href="#">Brands</a>
+            <a href="#">Gift Certificates</a>
+            <a href="#">Affiliate</a>
+            <a href="#">Specials</a>
+            <a href="#">Site Map</a>
+          </div>
+          <div class="footer-center">
+            <h3>INFORMATION</h3>
+            <a href="#">About Us</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Site Map</a>
+          </div>
+          <div class="footer-center">
+            <h3>MY ACCOUNT</h3>
+            <a href="#">My Account</a>
+            <a href="#">Order History</a>
+            <a href="#">Wish List</a>
+            <a href="#">Newsletter</a>
+            <a href="#">Returns</a>
+          </div>
+          <div class="footer-center">
+            <h3>CONTACT US</h3>
+            <div>
+              <span>
+                <i class="fas fa-map-marker-alt"></i>
+              </span>
+              42 Dream House, Dreammy street, 7131 Dreamville, USA
+            </div>
+            <div>
+              <span>
+                <i class="far fa-envelope"></i>
+              </span>
+              company@gmail.com
+            </div>
+            <div>
+              <span>
+                <i class="fas fa-phone"></i>
+              </span>
+              456-456-4512
+            </div>
+            <div>
+              <span>
+                <i class="far fa-paper-plane"></i>
+              </span>
+              Dream City, USA
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <!-- Custom Script -->
+    <script src="{% static 'js/index.js' %}"></script>
+
+    <!-- Cart Script -->
+    <script>
+      function loadCart() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || {};
+        let cartContainer = document.getElementById("cart-items");
+        let subtotalElement = document.getElementById("subtotal");
+        let taxElement = document.getElementById("tax");
+        let totalElement = document.getElementById("total");
+        cartContainer.innerHTML = ""; // Clear previous content
+    
+        let subtotal = 0;
+    
+        for (let itemId in cart) {
+            if (cart.hasOwnProperty(itemId)) {
+                let item = cart[itemId];
+    
+                // Ensure item and item.price are not null or undefined
+                if (item && typeof item.price === "number") {
+                    let itemSubtotal = item.price * item.quantity;
+                    subtotal += itemSubtotal;
+    
+                  
+                   // console.log(`Loading image for item ${itemId}: ${item.image}`);  this line is to check basically image is loading or not.
+    
+                    let itemElement = document.createElement("tr");
+                    itemElement.innerHTML = `
+                        <td>
+                            <div class="cart-info">
+                                <img src="${item.image}" alt="Product Image" onerror="this.onerror=null;this.src='/media/products/';"> 
+                                <div>
+                                    <p>${item.name}</p>
+                                    <span> Price: &#8377;${item.price.toFixed(2)}</span>
+                                    <br />
+                                    <a href="#" onclick="removeItem('${itemId}')">remove</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td><input type="number" value="${item.quantity}" min="1" onchange="updateQuantity('${itemId}', this.value)"></td>
+                        <td>&#8377;${itemSubtotal.toFixed(2)}</td>
+                    `;
+                    cartContainer.appendChild(itemElement);
+                }
+            }
+        }
+    
+        let tax = subtotal * 0.1; // Assuming 10% tax rate
+        let total = subtotal + tax;
+    
+        subtotalElement.textContent = `${subtotal.toFixed(2)}`;
+        taxElement.textContent = `${tax.toFixed(2)}`;
+        totalElement.textContent = `${total.toFixed(2)}`;
+    }
+    
+    function removeItem(itemId) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || {};
+        delete cart[itemId];
+        localStorage.setItem("cart", JSON.stringify(cart));
+        loadCart(); // Refresh the cart display
+    }
+    
+    function updateQuantity(itemId, quantity) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || {};
+        if (quantity < 1) {
+            removeItem(itemId);
+        } else {
+            cart[itemId].quantity = parseInt(quantity);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart(); // Refresh the cart display
+        }
+    }
+    </script>
+  </body>
+</html>

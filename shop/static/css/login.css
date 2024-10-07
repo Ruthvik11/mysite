@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+/* 
+.Login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+   
+    height: 80vh;
+    
+    width: 550px;
+    margin-left: 30%;
+} */
+
+.loginform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 6px rgb(70, 69, 69);
+}
+.loginform input {
+  background-color: beige;
+  height: 30px;
+  width: 250px;
+  border: none;
+  border-radius: 5px;
+}
+.loginform label {
+  font-size: 20px;
+}
+
+.loginform button {
+  width: 80px;
+  height: 25px;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: rgba(11, 156, 182, 0.973);
+  color: beige;
+  border: none;
+  border-radius: 5px;
+}
+
+.signup {
+  /* background-color: red; */
+  text-align: center;
+  width: 400px;
+  height: auto;
+  padding: 20px;
+  font-size: 18px;
+  color: black;
+}
+.signup p {
+  margin: 10px;
+  font-size: 20px;
+}
+
+.signup a {
+  width: 55px;
+  background-color: rgba(11, 156, 182, 0.973);
+  padding: 5px;
+  color: beige;
+  border-radius: 6px;
+}

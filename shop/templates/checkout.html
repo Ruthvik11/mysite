@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout Form</title>
+    <link rel="stylesheet" href="{% static 'css/checkoutstyle.css' %}" />
+  </head>
+  <body onload="fillHiddenInput()">
+    <div class="checkout-container">
+      <form class="checkout-form" method="post">
+        {% csrf_token %}
+        <h2>Checkout</h2>
+        <input type="hidden" name="item_json" id="item_json" />
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input
+            type="text"
+            id="first_name"
+            name="first_name"
+            placeholder="John"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input
+            type="text"
+            id="last_name"
+            name="last_name"
+            placeholder="Doe"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="john@example.com"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="99499345456"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            placeholder="19-47/ colony"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input
+            type="text"
+            id="city"
+            name="city"
+            placeholder="Los Angeles"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="state">State</label>
+          <input
+            type="text"
+            id="state"
+            name="state"
+            placeholder="CA"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="zip">Zip Code</label>
+          <input
+            type="text"
+            id="zip_code"
+            name="zip_code"
+            placeholder="90001"
+            required
+          />
+        </div>
+        <form method="get">
+          <button type="submit" class="btn">Submit</button>
+        </form>
+      </form>
+    </div>
+  </body>
+  <script>
+    function fillHiddenInput() {
+      let cart = localStorage.getItem("cart");
+      document.getElementById("item_json").value = cart;
+      localStorage.clear();
+    }
+  </script>
+</html>
+
+{% comment %} action="{% url 'sendingmail' %}" {% endcomment %}

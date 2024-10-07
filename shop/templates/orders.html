@@ -1,0 +1,48 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orders</title>
+    <link rel="stylesheet" href={%static 'css/orderstyles.css' %} />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Orders</h1>
+      </header>
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search orders..." />
+      </div>
+      <table id="orders-table">
+        <thead>
+          <tr>
+            <th>Order Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Products</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders%}
+          <tr>
+            <td>"{{order.order_id}}"</td>
+            <td>"{{order.first_name}}"</td>
+            <td>"{{order.last_name}}"</td>
+            <td>"{{order.email}}"</td>
+            <td>"{{order.address}}","{{order.city}}","{{order.state}}","{{order.zip_code}}"</td>
+            <td>"{{order.phone}}"</td>
+            <td>"{{order.item_json}}"</td>
+          </tr>
+          {%endfor%}
+          <!-- Order rows will be dynamically inserted here -->
+        </tbody>
+      </table>
+    </div>
+    <script src={%static "orderjs.js"%}></script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client Dashboard</title>
+    <link rel="stylesheet" href={% static "css/clientstyles.css" %} />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Client Dashboard</h1>
+      </header>
+      <section class="dashboard">
+        <div class="dash1">
+          <div class="card" id="orders">
+            <h2><a href="{% url 'order' %}">Orders</a></h2>
+            <!-- <div class="details"> -->
+            <!-- Order details will be dynamically inserted here -->
+            <!-- </div> -->
+          </div>
+
+          <div class="card" id="complaints">
+            <h2><a href="{% url 'complaint' %}">Complaints</a></h2>
+            <!-- <div class="details"> -->
+            <!-- Complaint details will be dynamically inserted here -->
+            <!-- </div> -->
+          </div>
+          <div class="card" id="users">
+            <h2><a href="{% url 'user_tab' %}">Users</a></h2>
+            <div class="details">
+              <!-- User details will be dynamically inserted here -->
+            </div>
+          </div>
+        </div>
+        <div class="dash2">
+          <div class="card" id="new-orders">
+            <h2>New Orders</h2>
+            <p>New Orders: <span id="new-orders-count">0</span></p>
+          </div>
+          <div class="card" id="new-orders">
+            <h2>New Complaint</h2>
+            <p>Complaint : <span id="new-orders-count">0</span></p>
+          </div>
+        </div>
+      </section>
+      <div id="notification" class="notification hidden">
+        <p>New order placed!</p>
+      </div>
+    </div>
+    <script src={%static "clientjs.js"%}></script>
+  </body>
+</html>

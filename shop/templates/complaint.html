@@ -1,0 +1,46 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complaints</title>
+    <link rel="stylesheet" href={%static "css/complaintstyles.css"%} />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Complaints</h1>
+      </header>
+      <div class="search-bar">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search complaints..."
+        />
+      </div>
+      <table id="complaints-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Complaint</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for complaint in complaints %}
+          <tr>
+            <td>"{{complaint.name}}"</td>
+            <td>"{{complaint.email}}"</td>
+            <td>"{{complaint.subject}}"</td>
+            <td>"{{complaint.message}}"</td>
+          </tr>
+          {% endfor%}
+          <!-- Complaint rows will be dynamically inserted here -->
+        </tbody>
+      </table>
+    </div>
+    <script src={%static "complaintjs.js"%}></script>
+  </body>
+</html>

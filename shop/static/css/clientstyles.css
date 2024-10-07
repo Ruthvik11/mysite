@@ -1,0 +1,119 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.dash1 {
+  display: flex;
+  gap: 1rem;
+  width: 980px;
+  justify-content: space-evenly;
+  margin-left: 60px;
+}
+.dashboard a {
+  text-decoration: none;
+  color: #007bff;
+}
+.dash1 .card {
+  width: 285px;
+  padding: 10px;
+  height: 80px;
+}
+.dash2 {
+  display: flex;
+  gap: 6rem;
+  justify-content: center;
+}
+
+.dash2 > .card {
+  height: 200px;
+  width: 400px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  color: #007bff;
+}
+
+.card p {
+  font-size: 1.2em;
+  color: #666;
+}
+
+.details {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.details p {
+  margin: 5px 0;
+}
+
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #007bff;
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.notification p {
+  margin: 0;
+}
+
+.notification.hidden {
+  display: none;
+}
+
+.notification.visible {
+  display: block;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+}
